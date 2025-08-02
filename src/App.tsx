@@ -5,19 +5,29 @@ function App() {
   const { signOut } = useAuth();
 
   return (
-    <main>
-      <div style={{ padding: "1rem", maxWidth: "800px", margin: "0 auto" }}>
-        <header
+    <main style={{ minHeight: "100vh" }}>
+      {/* 固定ヘッダー */}
+      <header
+        style={{
+          position: "sticky",
+          top: 0,
+          backgroundColor: "white",
+          borderBottom: "1px solid #ddd",
+          padding: "1rem",
+          zIndex: 1000,
+          boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+        }}
+      >
+        <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: "2rem",
-            borderBottom: "1px solid #ddd",
-            paddingBottom: "1rem",
+            maxWidth: "800px",
+            margin: "0 auto",
           }}
         >
-          <h1>AWS Cognito + S3 Demo</h1>
+          <h1 style={{ margin: 0 }}>AWS Cognito + S3 Demo</h1>
           <button
             onClick={signOut}
             type="button"
@@ -28,12 +38,16 @@ function App() {
               border: "none",
               borderRadius: "4px",
               cursor: "pointer",
+              fontSize: "0.9rem",
             }}
           >
             サインアウト
           </button>
-        </header>
+        </div>
+      </header>
 
+      {/* メインコンテンツ */}
+      <div style={{ padding: "2rem 1rem", maxWidth: "800px", margin: "0 auto" }}>
         <S3ObjectDemo />
       </div>
     </main>
