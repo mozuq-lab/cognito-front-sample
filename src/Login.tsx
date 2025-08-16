@@ -87,6 +87,19 @@ export default function Login({ onSignInSuccess }: LoginProps) {
     }
   };
 
+  const handleMicrosoftSignIn = async () => {
+    setLoading(true);
+    setError("");
+    
+    try {
+      await signInWithRedirect({ provider: { custom: "Microsoft" } });
+    } catch (err) {
+      console.error("Microsoft sign in error:", err);
+      setError((err as Error).message || "Microsoftログインに失敗しました");
+      setLoading(false);
+    }
+  };
+
   return (
     <div
       style={{
@@ -149,6 +162,29 @@ export default function Login({ onSignInSuccess }: LoginProps) {
             >
               <span>G</span>
               {loading ? "認証中..." : "Googleでログイン"}
+            </button>
+
+            <button
+              type="button"
+              onClick={handleMicrosoftSignIn}
+              disabled={loading}
+              style={{
+                padding: "0.75rem",
+                backgroundColor: "#0078d4",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: loading ? "not-allowed" : "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.5rem",
+                fontSize: "0.9rem",
+                opacity: loading ? 0.7 : 1,
+              }}
+            >
+              <span>M</span>
+              {loading ? "認証中..." : "Microsoftでログイン"}
             </button>
 
             <div
